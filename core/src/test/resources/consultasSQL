@@ -1,0 +1,8 @@
+#Borrado Tablas
+
+ DROP TABLE users;
+ DROP TABLE clients;
+ DROP TABLE hairdressers;
+ DROP TABLE pets;
+ DROP TABLE visits;
+ DROP TABLE inventories
