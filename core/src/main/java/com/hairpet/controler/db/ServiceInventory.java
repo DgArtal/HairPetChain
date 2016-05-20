@@ -106,14 +106,17 @@ public class ServiceInventory implements DAO<Inventory, Integer> {
 			inventory.setName("Tijeras");
 			inventory.setArticleCode("MC001");
 			inventory.setQuantity(8);
+			inventory.setIdHairdresser(2);
 			insert(inventory);
 			inventory.setName("Cepillo");
 			inventory.setArticleCode("MP004");
 			inventory.setQuantity(4);
+			inventory.setIdHairdresser(1);
 			insert(inventory);
 			inventory.setName("Secador");
 			inventory.setArticleCode("ES012");
 			inventory.setQuantity(2);
+			inventory.setIdHairdresser(3);
 			insert(inventory);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

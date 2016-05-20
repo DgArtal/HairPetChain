@@ -12,6 +12,7 @@ import com.hairpet.view.form.NewPetForm;
 import com.hairpet.view.form.NewUserForm;
 import com.hairpet.view.form.NewVisitForm;
 import com.hairpet.view.form.SearchForm;
+import com.hairpet.view.form.SearchUserForm;
 
 public final class ShowCloseFunctions {
 
@@ -45,10 +46,10 @@ public final class ShowCloseFunctions {
 	}
 
 	public static void showSearchForm(JFrame mainForm, SearchForm searchForm, String entity) {
-		// JPanel searchPanel = null;
-		// if (entity.equals("user")) {
-		// searchPanel = new NewUserForm();
-		// } else if (entity.equals("client")) {
+		JPanel searchPanel = null;
+		if (entity.equals("user")) {
+			searchPanel = new SearchUserForm();
+		} // else if (entity.equals("client")) {
 		// searchPanel = new NewClientForm();
 		// } else if (entity.equals("hairdresser")) {
 		// searchPanel = new NewHairdresserForm();
@@ -60,7 +61,7 @@ public final class ShowCloseFunctions {
 		// searchPanel = new NewVisitForm();
 		// }
 		//
-		// searchForm = new SearchForm(searchPanel);
+		searchForm = new SearchForm(searchPanel);
 		mainForm.add(searchForm);
 		mainForm.setVisible(true);
 

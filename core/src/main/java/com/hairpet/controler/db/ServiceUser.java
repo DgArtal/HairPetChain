@@ -16,11 +16,11 @@ public class ServiceUser implements DAO<User, Integer> {
 
 	private DBControler dbcontroler;
 
-	private final static String dbTable = "users";
-	private final static String identifierField = "idUser";
-	private final static String[] fields = { identifierField, "name", "password" };
+	private final static String DB_TABLE = "users";
+	private final static String IDENTIFIER_FIELD = "idUser";
+	private final static String[] FIELDS = { IDENTIFIER_FIELD, "name", "password" };
 
-	private final static Logger log = Logger.getLogger(ServiceUser.class.getName());
+	private static Logger log = Logger.getLogger(ServiceUser.class.getName());
 
 	public ServiceUser() {
 		super();
@@ -30,7 +30,7 @@ public class ServiceUser implements DAO<User, Integer> {
 	@Override
 	public boolean insert(User bean) throws Exception {
 		if (exists(bean) == -1) {
-			String query = "INSERT INTO " + dbTable + "(name, password) VALUES (?,?)";
+			String query = "INSERT INTO " + DB_TABLE + "(name, password) VALUES (?,?)";
 			PreparedStatement ps = dbcontroler.getPrepareStatement(query);
 			ps.setString(1, bean.getName());
 			ps.setString(2, bean.getPassword());
@@ -44,7 +44,7 @@ public class ServiceUser implements DAO<User, Integer> {
 
 	@Override
 	public Integer update(User bean) throws Exception {
-		String query = "UPDATE " + dbTable + " SET name = ?, password = ? WHERE " + identifierField + " = ?;";
+		String query = "UPDATE " + DB_TABLE + " SET name = ?, password = ? WHERE " + IDENTIFIER_FIELD + " = ?;";
 		PreparedStatement ps = dbcontroler.getPrepareStatement(query);
 		ps.setString(1, bean.getName());
 		ps.setString(2, String.valueOf(bean.getPassword()));
@@ -54,7 +54,7 @@ public class ServiceUser implements DAO<User, Integer> {
 
 	@Override
 	public boolean delete(Integer id) throws Exception {
-		String query = "DELETE FROM " + dbTable + " WHERE " + identifierField + " = ?;";
+		String query = "DELETE FROM " + DB_TABLE + " WHERE " + IDENTIFIER_FIELD + " = ?;";
 		PreparedStatement ps = dbcontroler.getPrepareStatement(query);
 		ps.setInt(1, id);
 		ps.execute();
@@ -64,7 +64,7 @@ public class ServiceUser implements DAO<User, Integer> {
 	@Override
 	public User find(Integer id) throws Exception {
 		User user = null;
-		String query = "SELECT * FROM " + dbTable + " WHERE " + identifierField + " = ?;";
+		String query = "SELECT * FROM " + DB_TABLE + " WHERE " + IDENTIFIER_FIELD + " = ?;";
 		PreparedStatement ps = dbcontroler.getPrepareStatement(query);
 		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
@@ -80,17 +80,16 @@ public class ServiceUser implements DAO<User, Integer> {
 
 	@Override
 	public List<User> searchAll(User bean) throws Exception {
-		String query = "SELECT * FROM " + dbTable;
+		String query = "SELECT * FROM " + DB_TABLE;
 		// TODO Establecer filtros con el bean
 		ArrayList<User> list = new ArrayList<>();
 		PreparedStatement ps = dbcontroler.getPrepareStatement(query);
 		ResultSet rs = ps.executeQuery();
-		rs.first();
 		while (rs.next()) {
 			User user = new User();
-			user.setId(rs.getInt(identifierField));
-			user.setName(rs.getString(fields[1]));
-			user.setPassword(rs.getString(fields[2]));
+			user.setId(rs.getInt(IDENTIFIER_FIELD));
+			user.setName(rs.getString(FIELDS[1]));
+			user.setPassword(rs.getString(FIELDS[2]));
 			list.add(user);
 		}
 		rs.close();
@@ -101,13 +100,13 @@ public class ServiceUser implements DAO<User, Integer> {
 	@Override
 	public Integer exists(User bean) throws Exception {
 		// TODO Codificar password
-		String query = "SELECT * FROM " + dbTable + " WHERE name = ? AND password = ?;";
+		String query = "SELECT * FROM " + DB_TABLE + " WHERE name = ? AND password = ?;";
 		PreparedStatement ps = dbcontroler.getPrepareStatement(query);
 		ps.setString(1, bean.getName());
 		ps.setString(2, bean.getPassword());
 		ResultSet rs = ps.executeQuery();
 		if (rs.first()) {
-			bean.setId(rs.getInt(identifierField));
+			bean.setId(rs.getInt(IDENTIFIER_FIELD));
 		} else {
 			bean.setId(-1);
 		}
@@ -120,7 +119,7 @@ public class ServiceUser implements DAO<User, Integer> {
 
 	public void datosPrueba() {
 
-		String query = "CREATE TABLE IF NOT EXISTS " + dbTable + "(" + identifierField
+		String query = "CREATE TABLE IF NOT EXISTS " + DB_TABLE + "(" + IDENTIFIER_FIELD
 				+ " INT PRIMARY KEY AUTO_INCREMENT,"
 				+ "name VARCHAR(50)," + "password VARCHAR(32));";
 		try {

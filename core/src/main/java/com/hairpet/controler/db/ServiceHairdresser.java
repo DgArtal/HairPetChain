@@ -77,7 +77,6 @@ public class ServiceHairdresser implements DAO<Hairdresser, Integer> {
 		ArrayList<Hairdresser> list = new ArrayList<>();
 		PreparedStatement ps = dbcontroler.getPrepareStatement(query);
 		ResultSet rs = ps.executeQuery();
-		rs.first();
 		while (rs.next()) {
 			Hairdresser hairdresser = new Hairdresser();
 			hairdresser.setId(rs.getInt(identifierField));

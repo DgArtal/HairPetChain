@@ -97,6 +97,8 @@ public class MainForm extends JFrame {
 		setVisible(true);
 		// PRUEBA ventana alta usuarios
 		// add(new AltaForm(new NewUserForm()));
+		// PRUEBA ventana Busqueda usuarios
+		// add(new SearchForm(new SearchUserForm()));
 
 	}
 

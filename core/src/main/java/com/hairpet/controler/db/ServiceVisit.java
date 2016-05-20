@@ -83,7 +83,6 @@ public class ServiceVisit implements DAO<Visit, Integer> {
 		ArrayList<Visit> list = new ArrayList<>();
 		PreparedStatement ps = dbcontroler.getPrepareStatement(query);
 		ResultSet rs = ps.executeQuery();
-		rs.first();
 		while (rs.next()) {
 			Visit visit = new Visit();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

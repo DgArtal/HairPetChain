@@ -28,7 +28,6 @@ public class SubMenuUsers extends SubMenu {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Has pulsado Buscar en usuarios");
 				AppContext.getInstance().fireEvent("buscar_usuarios", false, true);
 			}
 		});

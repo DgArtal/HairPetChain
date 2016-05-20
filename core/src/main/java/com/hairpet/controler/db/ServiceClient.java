@@ -76,7 +76,6 @@ public class ServiceClient implements DAO<Client, Integer> {
 		ArrayList<Client> list = new ArrayList<>();
 		PreparedStatement ps = dbcontroler.getPrepareStatement(query);
 		ResultSet rs = ps.executeQuery();
-		rs.first();
 		while (rs.next()) {
 			Client client = new Client();
 			client.setId(rs.getInt(identifierField));
